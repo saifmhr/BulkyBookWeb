@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container mt-3">
+    <div class="row pt-4 mb-3">
+        <div class="col-6">
+            <h1 class="text-decoration-underline text-uppercase">Category List</h1>
+        </div>
+
+        <div class="col-6 text-end">
+            <a asp-action="Create" asp-controller="Category" asp-area="" class="btn btn-primary">
+                <i class="bi bi-plus-circle-dotted"></i>&nbsp: Create New
+            </a>
+        </div>
+    </div>
+
+    @if (TempData["success"] != null)
+    {
+        <h4>@TempData["success"]</h4>
+    }
+
+    <table class="table table-hover pt-3">
+        <thead>
+            <tr>
+
+                <th scope="col">Name</th>
+                <th scope="col">Display Order</th>
+                <th scope="col">Date Time</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <th hidden>@obj.Id</th>
+                    <th width="23%">@obj.Name</th>
+                    <th width="23%">@obj.DisplayOrder</th>
+                    <th width="24%">@obj.CreateDateTime</th>
+                    <th width="30%">
+
+                        <a  class="btn btn-info" asp-controller="Category" asp-action="Detail" asp-route-id="@obj.Id" ><i class="bi bi-info-circle"></i>&nbsp: Detail</a>
+
+                        <a role="group" class="btn btn-secondary" asp-controller="Category" asp-action="Edit" asp-route-id="@obj.Id">
+                            <i class="bi bi-pencil-square"></i>&nbsp: Edit
+                        </a>
+
+                        <a class="btn btn-danger" asp-controller="Category" asp-action="Delete" asp-route-id="@obj.Id">
+                            <i class="bi bi-exclamation-triangle"></i>&nbsp: Delete
+                        </a>
+
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
